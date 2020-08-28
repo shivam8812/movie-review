@@ -1,0 +1,21 @@
+.movieslist{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: space-between;
+}
+
+.movielist > .movie{
+    flex: 1 1 30%;
+    margin: 10px;
+}
+.movie{
+    margin: 10px;
+    margin-left: 80px;
+    cursor: pointer;
+}
+.movie{
+    font: 100px;
+    
+}

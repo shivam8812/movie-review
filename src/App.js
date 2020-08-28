@@ -1,26 +1,93 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Search from './Search';
+import axios from 'axios'
+import MoviesList from './MoviesList'
+import Movie from './Movie'
+import { createHashHistory } from 'history'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+class App extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state={
+      text:'',movies: [],movie: [],movieUrl:''
+    }
+    this.handleInput=this.handleInput.bind(this);
+    this.handleSubmit=this.handleSubmit.bind(this);
+    this.getMoviesData=this.getMoviesData.bind(this);
+    this.handleClick=this.handleClick.bind(this);
+  }
+  
+  handleInput(e){
+    this.setState({
+      text:e.target.value
+    })
+  }
+  handleSubmit(e){
+    e.preventDefault();
+      this.setState({
+      text:e.target.value,movieUrl:"/"
+    })
+    this.getMoviesData();
+  }
+  
+  getMoviesData(){
+    //setAppState({ loading: true });
+    const apiUrl = `http://www.omdbapi.com/?&plot=full&apikey=ed691149&s=${this.state.text}`;
+    axios.get(apiUrl).then((repos) => {
+      const allmovies = repos.data.Search;
+      console.log(allmovies);
+      if(repos.data.Response=="True"){
+      this.setState({
+        movies: allmovies,
+      })}
+      //setAppState({ loading: false, repos: allRepos });
+    });
+  }
+  handleClick=(id)=> {
+    console.log(id);
+    const movieUrl = `http://www.omdbapi.com/?&plot=full&apikey=ed691149&i=${id}`;
+    axios.get(movieUrl).then((repos) => {
+      const moviedata = repos.data;
+      console.log(moviedata);
+      this.setState({
+        movie: moviedata,movieUrl:(`/${moviedata.imdbID}`)
+      })
+  })
+}
 
-function App() {
+
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="header">
+        <div>
+        <h1>Movie Review</h1>
+        </div>
       </header>
+      <Router>
+      <Search handleinput={this.handleInput} text={this.state.text} handleSubmit={this.handleSubmit} />
+        
+        <div>
+          <Switch>
+            <Route exact path="/">
+            <MoviesList movies={this.state.movies} handleClick={this.handleClick} />
+            </Route>
+            <Route exact path={this.state.movieUrl}>
+              <Movie movie={this.state.movie} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
-}
+  }
+  }
 
 export default App;
