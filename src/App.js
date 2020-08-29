@@ -72,11 +72,11 @@ class App extends React.Component{
         </div>
       </header>
       <Router>
-      <Search handleinput={this.handleInput} text={this.state.text} handleSubmit={this.handleSubmit} />
         
         <div>
           <Switch>
             <Route exact path="/">
+            <Search handleinput={this.handleInput} text={this.state.text} handleSubmit={this.handleSubmit} />
             <MoviesList movies={this.state.movies} handleClick={this.handleClick} />
             </Route>
             <Route exact path={this.state.movieUrl}>

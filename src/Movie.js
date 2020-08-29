@@ -1,18 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import "./Movie.css"
 function Movie(props) {
     const movie=props.movie;
     const movieData=<div>
-        <Link to="/">
-          <h1>home</h1>
+        <Link to="/" className="lk">
+        <div className="box">
+            <div className="hm">
+          <h1 className="home">home</h1>
+          </div>
+          </div>
         </Link>
         <img src={movie.Poster} />
-        <h1>Actors: {movie.Actors}</h1>
-        <h1>Description: {movie.Plot}</h1>
-        <h1>Rating: {movie.imdbRating}</h1>
-        <h1>Released Date: {movie.Released}</h1>
-        <h1>BoxOffice Collection: {movie.BoxOffice}</h1>
+        <h1>Actors</h1> <div className="jtext">{movie.Actors}</div>
+        <h1>Description</h1> <div className="jtext">{movie.Plot}</div> 
+        <h1>Rating </h1> <div className="jtext">{movie.imdbRating}</div>
+        <h1>Released Date </h1> <div className="jtext">{movie.Released}</div>
+        <h1>BoxOffice Collection </h1> <div className="jtext">{movie.BoxOffice}</div>
         </div>
     return (
         <div>

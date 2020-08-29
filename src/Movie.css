@@ -1,0 +1,35 @@
+.home{
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
+    font: bolder;
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+}
+.box{
+    display: flex;
+    justify-content: center;
+}
+.hm{
+    background-color:rgb(11, 11, 59);
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 5px;
+    transition: transform .2s;
+}
+.hm:hover{
+    opacity: 0.8;
+    transform: scale(1.1);
+}
+.lk{
+    text-decoration: none;
+}
+.jtext{
+    font-size: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    opacity: 0.8;
+}

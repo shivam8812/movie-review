@@ -15,7 +15,13 @@
     margin-left: 80px;
     cursor: pointer;
 }
-.movie{
-    font: 100px;
-    
+.movie img{
+    transition: transform .2s;
+    border-radius: 5px;
+}
+.movie img:hover{
+    transform: scale(1.1);
+    box-shadow: 100px;
+    opacity: 0.8;
+    border-radius: 5px;
 }
