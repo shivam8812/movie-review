@@ -39,7 +39,7 @@ class App extends React.Component{
   
   getMoviesData(){
     //setAppState({ loading: true });
-    const apiUrl = `http://www.omdbapi.com/?&plot=full&apikey=ed691149&s=${this.state.text}`;
+    const apiUrl = `https://www.omdbapi.com/?&plot=full&apikey=ed691149&s=${this.state.text}`;
     axios.get(apiUrl).then((repos) => {
       const allmovies = repos.data.Search;
       console.log(allmovies);
@@ -52,13 +52,15 @@ class App extends React.Component{
   }
   handleClick=(id)=> {
     console.log(id);
-    const movieUrl = `https://www.omdbapi.com/?&plot=full&apikey=ed691149&i=${id}`;
-    axios.get(movieUrl).then((repos) => {
+    const history= createHashHistory();
+    const movieurl = `https://www.omdbapi.com/?&plot=full&apikey=ed691149&i=${id}`;
+    axios.get(movieurl).then((repos) => {
       const moviedata = repos.data;
       console.log(moviedata);
       this.setState({
-        movie: moviedata,movieUrl:(`/${moviedata.imdbID}`)
-      })
+        movie: moviedata,movieUrl:(`/${id}`)
+      });
+      //history.push(this.state.movieUrl);
   })
 }
 
@@ -79,7 +81,7 @@ class App extends React.Component{
             <Search handleinput={this.handleInput} text={this.state.text} handleSubmit={this.handleSubmit} />
             <MoviesList movies={this.state.movies} handleClick={this.handleClick} />
             </Route>
-            <Route exact path={this.state.movieUrl}>
+            <Route path={this.state.movieUrl}>
               <Movie movie={this.state.movie} />
             </Route>
           </Switch>
