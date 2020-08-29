@@ -70,7 +70,7 @@ class App extends React.Component{
     <div className="App">
       <header className="header">
         <div>
-        <h1>Movie Review.</h1>
+        <h1>Movie Information</h1>
         </div>
       </header>
       <Router>
