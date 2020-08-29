@@ -52,7 +52,7 @@ class App extends React.Component{
   }
   handleClick=(id)=> {
     console.log(id);
-    const movieUrl = `http://www.omdbapi.com/?&plot=full&apikey=ed691149&i=${id}`;
+    const movieUrl = `https://www.omdbapi.com/?&plot=full&apikey=ed691149&i=${id}`;
     axios.get(movieUrl).then((repos) => {
       const moviedata = repos.data;
       console.log(moviedata);
