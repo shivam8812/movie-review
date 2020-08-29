@@ -75,7 +75,7 @@ class App extends React.Component{
         
         <div>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/movie-review">
             <Search handleinput={this.handleInput} text={this.state.text} handleSubmit={this.handleSubmit} />
             <MoviesList movies={this.state.movies} handleClick={this.handleClick} />
             </Route>

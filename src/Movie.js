@@ -4,7 +4,7 @@ import "./Movie.css"
 function Movie(props) {
     const movie=props.movie;
     const movieData=<div>
-        <Link to="/" className="lk">
+        <Link to="/movie-review" className="lk">
         <div className="box">
             <div className="hm">
           <h1 className="home">home</h1>
