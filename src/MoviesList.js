@@ -6,8 +6,8 @@ function MoviesList(props) {
     const a=movies.map(movie => 
         {   
             return <div className="movie" key={movie.imdbID}>
-                <Link to={movie.imdbID}>
-                    <img src={movie.Poster} onClick={() => props.handleClick(movie.imdbID)} />
+                <Link to={`/${movie.imdbID}`}>
+                    <img src={movie.Poster} />
                 </Link>
                     <p>{movie.Title}</p>
                 </div>

@@ -4,7 +4,8 @@ import Search from './Search';
 import axios from 'axios'
 import MoviesList from './MoviesList'
 import Movie from './Movie'
-import { createHashHistory } from 'history'
+import { createBrowserHistory } from "history";
+import { useHistory,withRouter } from "react-router-dom";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +13,8 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
+const customHistory = createBrowserHistory();
+
 class App extends React.Component{
   constructor(props) {
     super(props);
@@ -21,9 +24,7 @@ class App extends React.Component{
     this.handleInput=this.handleInput.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
     this.getMoviesData=this.getMoviesData.bind(this);
-    this.handleClick=this.handleClick.bind(this);
   }
-  
   handleInput(e){
     this.setState({
       text:e.target.value
@@ -31,6 +32,7 @@ class App extends React.Component{
   }
   handleSubmit(e){
     e.preventDefault();
+    //history.push("/movie-review");
       this.setState({
       text:e.target.value,movieUrl:"/"
     })
@@ -50,19 +52,9 @@ class App extends React.Component{
       //setAppState({ loading: false, repos: allRepos });
     });
   }
-  handleClick=(id)=> {
-    console.log(id);
-    const history= createHashHistory();
-    const movieurl = `https://www.omdbapi.com/?&plot=full&apikey=ed691149&i=${id}`;
-    axios.get(movieurl).then((repos) => {
-      const moviedata = repos.data;
-      console.log(moviedata);
-      this.setState({
-        movie: moviedata,movieUrl:(`/${id}`)
-      });
-      //history.push(this.state.movieUrl);
-  })
-}
+  componentDidMount(){
+    console.log(this.props,"abs")
+  }
 
 
   render(){
@@ -73,16 +65,16 @@ class App extends React.Component{
         <h1>Movie Information</h1>
         </div>
       </header>
-      <Router>
+      <Router history={customHistory}>
         
         <div>
+        <Search handleinput={this.handleInput} text={this.state.text} handleSubmit={this.handleSubmit} />
           <Switch>
             <Route exact path="/movie-review">
-            <Search handleinput={this.handleInput} text={this.state.text} handleSubmit={this.handleSubmit} />
-            <MoviesList movies={this.state.movies} handleClick={this.handleClick} />
+              <MoviesList movies={this.state.movies} />
             </Route>
-            <Route path={this.state.movieUrl}>
-              <Movie movie={this.state.movie} />
+            <Route path="/:movieID">
+              <Movie  />
             </Route>
           </Switch>
         </div>

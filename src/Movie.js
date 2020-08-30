@@ -1,8 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
+import { Link,useParams } from 'react-router-dom';
+import axios from 'axios'
 import "./Movie.css"
 function Movie(props) {
-    const movie=props.movie;
+    const [movie,setmovie]=useState({});
+    let { movieID } = useParams();
+    useEffect(() => {
+            console.log(movieID);
+            const movieurl = `https://www.omdbapi.com/?&plot=full&apikey=ed691149&i=${movieID}`;
+            axios.get(movieurl).then((repos) => {
+              const moviedata = repos.data;
+              console.log(moviedata);
+              setmovie(
+                moviedata
+              )});               
+    },[]);
     const movieData=<div>
         <Link to="/movie-review" className="lk">
         <div className="box">
